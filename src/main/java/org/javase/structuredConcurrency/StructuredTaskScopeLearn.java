@@ -108,10 +108,10 @@ public class StructuredTaskScopeLearn {
 
     private static void exampleCustomTaskScope() {
         try (var scope = new AverageWeatherTaskScope()) {
-            var task1 = new LongRunningTask("weather-1", 4, "32", true);
+            var task1 = new LongRunningTask("weather-1", 4, "32", false);
             var task2 = new LongRunningTask("weather-2", 10, "33", false);
-            var task3 = new LongRunningTask("weather-3", 2, "34", true);
-            var task4 = new LongRunningTask("weather-4", 5, "31", true);
+            var task3 = new LongRunningTask("weather-3", 2, "34", false);
+            var task4 = new LongRunningTask("weather-4", 5, "31", false);
 
             scope.fork(task1);
             scope.fork(task2);

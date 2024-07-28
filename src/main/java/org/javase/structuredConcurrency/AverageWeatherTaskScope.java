@@ -28,7 +28,7 @@ public class AverageWeatherTaskScope extends StructuredTaskScope<TaskResponse> {
     public TaskResponse response(){
         super.ensureOwnerAndJoined();
         if(successfulTasks.size() != 2)
-            throw new RuntimeException("At least 2 tasks has to be successful");
+            throw new RuntimeException("At least 2 tasks have to be successful");
 
         var task1 = successfulTasks.getFirst();
         var task2 = successfulTasks.getLast();
