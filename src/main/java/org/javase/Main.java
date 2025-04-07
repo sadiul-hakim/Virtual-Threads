@@ -1,28 +1,24 @@
 package org.javase;
 
-import java.net.UnknownHostException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.time.zone.ZoneOffsetTransition;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openjdk.jmh.runner.RunnerException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
+    public static void main(String[] args) throws RunnerException, JsonProcessingException {
 
-    public static void main(String[] args) throws UnknownHostException {
+        Map<String, String> errorMessage = new HashMap<String, String>() {{
+            put("error", "Failed to parse request body. " );
+            put("details", "");
+        }};
 
-        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a");
-
-        LocalDateTime localDateTime = LocalDateTime.of(2024, 1, 1, 0, 0);
-
-        ZoneOffsetTransition zoneOffsetTransition = ZoneOffsetTransition.of(localDateTime,ZoneOffset.of("+6"), ZoneOffset.of("+5"));
-        LocalDateTime before = zoneOffsetTransition.getDateTimeBefore();
-        LocalDateTime after = zoneOffsetTransition.getDateTimeAfter();
-
-        System.out.println(formatter.format(before));
-        System.out.println(formatter.format(after));
-
-        System.out.println(ZoneOffset.of("+6"));
+        ObjectMapper mapper = new ObjectMapper();
+        String s = mapper.writeValueAsString(errorMessage);
+        System.out.println(s.contains("error"));
     }
 }
 
- 
